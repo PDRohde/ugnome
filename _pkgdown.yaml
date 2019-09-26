@@ -1,5 +1,0 @@
-template:
-  params:
-    bootswatch: simplex
-development:
-  mode: devel
