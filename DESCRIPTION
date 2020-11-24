@@ -3,10 +3,8 @@ Type: Package
 Title: Utility Functions for Genomic Analyses
 Version: 0.1.0
 Author: Palle Duun Rohde
-Maintainer: Palle Duun Rohde <palle.d.rohde@mbg.au.dk>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Maintainer: Palle Duun Rohde <palledr@bio.aau.dk>
+Description: Provides utility functions for genome analyses.
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/PDRohde/ugnome
