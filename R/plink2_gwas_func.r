@@ -1,5 +1,14 @@
 #' Performs linear/logistic regression using PLINK 2.0 alpha
 #'
+#' @description
+#' The plink_reg function is for running genome-wide association studies in R with PLINK version 2.0.
+#' PLINK version 1.9 is also available, but does not allow multi-core processes.
+#'
+#' The function can initiate generalised linear models with logit as link function for logistic regression,
+#' or based on Firth's logistic regression for phenotypes with very few cases.
+#'
+#' Note that this requires PLINK 2.0 (or earlier versions) installed.
+#'
 #' @param bedfile Path to the PLINK bedfile
 #' @param bimfile Path to the PLINK bimfile
 #' @param famfile Path to the PLINK famfile
@@ -17,6 +26,62 @@
 #' @param ncores number of cores used in the analysis
 #' @param dir path to PLINK 2.0 execuatble
 #'
+#' @author Palle Duun Rohde
+#'
+#' @examples
+#' # PLINK example data can be obtained from: https://zzz.bwh.harvard.edu/plink/tutorial.shtml.
+#' # First one should make a binary PED file: plink --file hapmap1 --make-bed --out hapmap1
+#'
+#' #---------------#
+#' # ORGANIZE DATA #
+#' # the 5th and 6th column of the FAM-file contains sex status, and a disease phenotype,
+#' # and the 3rd column of the POP-file is a indicator variable on ancestry
+#'   dat <- fread("./hapmap1/qt.phe", data.table=FALSE)
+#'   cov <- fread("./hapmap1/hapmap1.fam", data.table=FALSE)
+#'   pop <-fread("./pop.phe", data.table=FALSE)#'
+#'   dat <- cbind(dat,cov[,5:6],pop[,3])
+#'   colnames(dat) <- c("FID","IID","qt","sex","disease","pop")
+#'
+#' # specify which variants to use in the regression
+#'   rsids <- fread("./hapmap1/hapmap1.bim", data.table=FALSE)$V2
+#'
+#' # specify the location of the PLINK files:
+#'   bed <- "/hapmap1/hapmap1"
+#'   bim <- "/hapmap1/hapmap1.bim"
+#'   fam <- "/hapmap1/hapmap1.fam"
+#'
+#' #---------------#
+#' #     GLM       #
+#' # make the phenotype file (here the phenotype is a quantitative trait)
+#'   yFile <- dat[,c("FID","IID","qt")]
+#'   colnames(yFile) <- c("FID", "IID", "y")
+#'
+#' # make the covariate file
+#'   covFile <- dat[,c("FID","IID","sex","pop")]
+#'   covar <-  paste(c("sex","pop"), collapse=" ")
+#'
+#' # run the GWAS on the quantitative trait
+#'   tmpOut <- "./tmpdir/test"
+#'   plink_reg(bedfile=bed, famfile=fam, bimfile=bim, y=yFile, fids=yFile$FID, ids=yFile$IID, covFile=covFile,covar=covar,
+#'             fnOut=tmpOut, logistic=FALSE, rsids=rsids, ncores=1,
+#'             wd="./tmpdir/", dir="./software/plink2/plink2")
+#'
+#' #---------------#
+#' #   GLM-logit  #
+#' # make the phenotype file (here the phenotype is a binary trait)
+#'   yFile <- dat[,c("FID","IID","disease")]
+#'   colnames(yFile) <- c("FID", "IID", "y")
+#'
+#' # make the covariate file
+#'   covFile <- dat[,c("FID","IID","sex","pop")]
+#'   covar <-  paste(c("sex","pop"), collapse=" ")
+#'
+#' # run the GWAS on the quantitative trait
+#'   tmpOut <- "./tmpdir/test"
+#'   plink_reg(bedfile=bed, famfile=fam, bimfile=bim, y=yFile, fids=yFile$FID, ids=yFile$IID, covFile=covFile,covar=covar,
+#'             fnOut=tmpOut, logistic=TRUE, rsids=rsids, ncores=1,
+#'             wd="./tmpdir/", dir="./software/plink2/plink2")
+
 #' @export
 plink_reg <- function(bedfile=NULL, bimfile=NULL, famfile=NULL, yFile=NULL, covFile=NULL,  covar=NULL, fids=NULL, ids=NULL,
                       rsids=NULL, fnSNPs=NULL, fnOut=NULL, wd=NULL, logistic=FALSE,firth=FALSE, ncores=1, dir=NULL){
