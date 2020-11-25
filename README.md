@@ -7,3 +7,15 @@
 </p>
 
 # Utility Functions for Genomic Analysis
+
+## Installation
+In R, run
+
+```r
+# install.packages("devtools")
+devtools::install_github("PDRohde/ugnome")
+```
+
+## Other useful packages
+We have previously developed and published the R-package qgg for quantitative genetic and genomic analyses
+[package {qgg}](http://psoerensen.github.io/qgg/index.html);https://academic.oup.com/bioinformatics/article/36/8/2614/5688744.
