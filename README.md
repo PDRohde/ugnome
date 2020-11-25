@@ -17,8 +17,7 @@ devtools::install_github("PDRohde/ugnome")
 ```
 
 ## Other useful packages
-We have previously developed and published the R-package [{qgg}](https://academic.oup.com/bioinformatics/article/36/8/2614/5688744) for quantitative genetic and genomic analyses
-, which can be installed from CRAN:
+We have previously developed and published the R-package [{qgg}](https://academic.oup.com/bioinformatics/article/36/8/2614/5688744) for quantitative genetic and genomic analyses, which can be installed from CRAN:
 ```r
 install.packages("qgg")
 library(qgg)
