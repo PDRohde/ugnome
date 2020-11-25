@@ -2,10 +2,18 @@ Package: ugnome
 Type: Package
 Title: Utility Functions for Genomic Analyses
 Version: 0.1.0
-Author: Palle Duun Rohde
-Maintainer: Palle Duun Rohde <palledr@bio.aau.dk>
+Authors@R: person("Palle Duun", "Rohde", email = "palledr@bio.aau.dk",
+                  role = c("aut", "cre"))
 Description: Provides utility functions for genome analyses.
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/PDRohde/ugnome
 BugReports: https://github.com/PDRohde/ugnome/issues
+RoxygenNote: 7.1.1
+Imports:
+    data.table
+License: GPL-2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
