@@ -1,13 +1,2 @@
-<img src="https://github.com/PDRohde/p2_UKBBmedication/blob/master/misc/Precision-Medicine-Featured-Image.jpg">
-
-# Use of correlated information in precision medicine
-
-## Study overview
-
-### Design details
-We used a fully adjusted two stage procedure for adjusting and normalising the response variable (PMID: 30653739). In the first stage, the response variable (data field 137) was adjusted for sex, age, UK Biobank assessment centres and the first 10 principal components.
-
-In the subsequent estimation of summary statistics the same set of covariates were included to further increase statistical power.
-
-## Summary of findings.
-The main findings can be found [here](./report/prediction_correlated_y.pdf)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FPDRohde%2Fugnome&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+# Utility functions for genome analysis
