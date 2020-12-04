@@ -96,7 +96,7 @@ plink_reg <- function(bedfile=NULL, bimfile=NULL, famfile=NULL, yFile=NULL, covF
 
   if(!is.null(rsids)){
       fnSNPs <- paste0(wd, "rsids")
-      fwrite( rsids, sep = "\t", file = fnSNPs )
+      fwrite( as.data.frame(rsids), file = fnSNPs )
   }
 
   if(logistic==TRUE){
