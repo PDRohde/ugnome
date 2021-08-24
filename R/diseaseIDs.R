@@ -17,25 +17,26 @@
 #' @export
 #'
 getID <- function(ICD=NULL, SR=NULL){
-  if(!is.null(SR)){
-    srID <- apply(self, 2, function(x){
-      case <- names(na.omit(x[x==SR]))
-      return(case)
-    })
-    srID <- unique(unname(unlist(srID)))
-  }
-  if(!is.null(ICD)){
-    icdID <- NULL
-    for(i in 1:length(ICD)){
-      tmp <- apply(icd10, 2, function(x){
-        case <- names(na.omit(x[grep(ICD[i],x)]))
-        return(case)
-      })
-      icdID <- c(icdID, unique(unname(unlist(tmp))))
+    if(!is.null(SR)){
+        srID <- apply(self, 2, function(x){
+            case <- names(na.omit(x[x==SR]))
+            return(case)
+           })
+        srID <- unique(unname(unlist(srID)))
     }
-    icdID <- unique(icdID)
-  }
-  if(!is.null(SR)){ids <- unique(c(srID, icdID))}
-  if(is.null(SR)){ids <- unique(c(icdID))}
-  return(ids)
-}
+    if(!is.null(ICD)){
+        icdID <- NULL
+        for(i in 1:length(ICD)){
+            tmp <- apply(icd10, 2, function(x){
+            case <- names(na.omit(x[grep(ICD[i],x)]))
+            return(case)
+            })
+            icdID <- c(icdID, unique(unname(unlist(tmp))))
+        }
+        icdID <- unique(icdID)
+        }
+    if(!is.null(SR)&!is.null(ICD)){ids <- unique(c(srID, icdID))}
+    if(!is.null(SR)&is.null(ICD)){ids <- unique(c(srID))}
+    if(is.null(SR)){ids <- unique(c(icdID))}
+    return(ids)
+    }
